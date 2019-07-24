@@ -1,0 +1,21 @@
+# Service config sample for Linux /etc/systemd/system/docker-compose-app.service
+# Change the WorkingDirectory parameter with your dockerized project path
+# And enable the service to start automatically: systemctl enable docker-compose-app
+# Then use: systemctl start[stop] docker-compose-app
+
+[Unit]
+Description=Docker Compose Option house API Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+WorkingDirectory=/var/optionhouse/optionhouse-backend
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down
+TimeoutStartSec=0
+Restart=on-failure
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target

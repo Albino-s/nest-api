@@ -1,0 +1,28 @@
+# dependencies
+/node_modules
+/dist
+/coverage
+/logs
+.env
+.env
+*.log
+/docker/mysql
+
+# IDE
+/.idea
+/.awcache
+/.vscode
+
+# misc
+npm-debug.log
+
+# example
+/quick-start
+
+# tests
+/test
+/coverage
+/.nyc_output
+
+# dist
+/dist
