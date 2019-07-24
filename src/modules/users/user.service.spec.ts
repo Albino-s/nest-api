@@ -11,7 +11,7 @@ import {FakeEntitiesModule} from '../../tests/fake.entities.module';
 import {entitiesCreateMethods, FakeEntitiesService} from '../../tests/fake.entities.service';
 import * as faker from "faker";
 
-describe('CatsController', () => {
+describe('UsersService', () => {
 
     let usersController: UsersController;
     let usersService: UsersService;

@@ -19,7 +19,7 @@ import {MailerModule, MailerService} from '@nest-modules/mailer';
 import {VerifyUserMailer} from '../../emails/verify-user.mailer';
 import * as bcrypt from 'bcrypt';
 
-describe('CatsController', () => {
+describe('AuthService', () => {
 
     let authController: AuthController;
     let authService: AuthService;
