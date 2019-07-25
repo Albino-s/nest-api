@@ -14,11 +14,11 @@ pipelines:
           - yarn install
           - yarn test
         services:
-          - mysql
+          - database
 
 definitions:
   services:
-    mysql:
+    database:
       image: mysql
       environment:
         MYSQL_DATABASE: test
