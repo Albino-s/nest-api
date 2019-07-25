@@ -9,6 +9,7 @@ export class TestTypeormCoinfigService implements TypeOrmOptionsFactory {
     ) {}
 
     createTypeOrmOptions(): TypeOrmModuleOptions {
+        console.log(this.config.get('database.mysql-test'));
         return {
             type: 'mysql',
             host: this.config.get('database.mysql-test.host'),
