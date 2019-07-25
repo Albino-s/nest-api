@@ -88,7 +88,7 @@ export class AuthService {
   }
 
   public async verifyAndLogin(verificationData: VerifyUserDto) {
-      return this.findByCode(verificationData.code).then((userData) => {
+      return this.findByCode(verificationData.code).then(async (userData) => {
           if (!userData) {
               throw new BadRequestException('Code is not exists');
           }
@@ -96,7 +96,7 @@ export class AuthService {
               throw new BadRequestException('Email was already verified');
           }
           userData.isVerified = true;
-          this.userRepository.save(userData);
+          await this.userRepository.save(userData);
           return this.getLoginResponseData(userData);
       });
   }

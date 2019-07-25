@@ -17,6 +17,8 @@ import {AppMailerModule} from '../../emails/app-mailer.module';
 import {AuthController} from './auth.controller';
 import {MailerModule, MailerService} from '@nest-modules/mailer';
 import {VerifyUserMailer} from '../../emails/verify-user.mailer';
+import {BadRequestException, ClassSerializerInterceptor, ForbiddenException} from '@nestjs/common';
+import {CustomValidationException} from '../../filters/custom-validation.exception';
 import * as bcrypt from 'bcrypt';
 
 describe('AuthService', () => {
@@ -136,6 +138,30 @@ describe('AuthService', () => {
             expect(loggedInUser).toHaveProperty('accessToken');
 
         });
+
+        it('should return BadRequestException not verified', async () => {
+            const password = 'stronger than hell';
+            const cryptPass = await bcrypt.hashSync(password, 11);
+            const user = await fakeEntitiesService.createUser({isVerified: false, password: cryptPass});
+            await expect(authService.login({email: user.email, password}))
+                .rejects.toThrow(BadRequestException);
+        });
+
+        it('should return BadRequestException incorrect credentials', async () => {
+            const password = 'stronger than hell';
+            const cryptPass = await bcrypt.hashSync(password, 11);
+            const user = await fakeEntitiesService.createUser({isVerified: false, password: cryptPass});
+            await expect(authService.login({email: user.email, password: 'lalala'}))
+                .rejects.toThrow(BadRequestException);
+        });
+
+        it('should return CustomValidationException not found', async () => {
+            const password = 'stronger than hell';
+            const cryptPass = await bcrypt.hashSync(password, 11);
+            const user = await fakeEntitiesService.createUser({isVerified: false, password: cryptPass});
+            await expect(authService.login({email: 'user@exapmple.com', password: 'lalalala'}))
+                .rejects.toThrow(CustomValidationException);
+        });
     });
 
     describe('verify', () => {
@@ -150,6 +176,18 @@ describe('AuthService', () => {
             expect(loggedInUser).toHaveProperty('isVerified', true);
             expect(loggedInUser).toHaveProperty('accessToken');
 
+        });
+
+        it('should return BadRequestException', async () => {
+            const user = await fakeEntitiesService.createUser({isVerified: false});
+            await expect(authService.verifyAndLogin({ code: 'blablabla'}))
+                .rejects.toThrow(BadRequestException);
+        });
+
+        it('should return BadRequestException for verified', async () => {
+            const user = await fakeEntitiesService.createUser({isVerified: true});
+            await expect(authService.verifyAndLogin({ code: user.verificationCode}))
+                .rejects.toThrow(BadRequestException);
         });
     });
 
