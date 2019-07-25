@@ -13,3 +13,13 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - yarn install
           - yarn test
+        services:
+          - mysql
+
+definitions:
+  services:
+    mysql:
+      image: mysql
+      environment:
+        MYSQL_DATABASE: test
+        MYSQL_ROOT_PASSWORD: secret
