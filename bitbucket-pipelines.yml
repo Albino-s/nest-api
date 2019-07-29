@@ -5,27 +5,43 @@
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: node:10.15.3
 
+test: &test
+  step:
+    name: Tests
+    caches:
+      - node
+    services:
+      - database  
+    script: # Modify the commands below to build your repository.
+      - yarn install
+      - yarn test
+      - yarn test-e2e
+
+push: &push
+  step:
+    name: Tests
+    caches:
+      - node
+    services:
+      - database
+    script: # Modify the commands below to build your repository.
+      - yarn build
+      - cd dist
+      - apt-get update
+      - apt-get install zip -y
+      - zip -r ../deploy.zip . *
+      - cd ..
+      - ssh -t root@li86-123.members.linode.com "echo 'success' >> test.new"
+      - echo "put deploy.zip" >> run.sh
+      - sftp -b run.sh root@li86-123.members.linode.com:/root
+
 pipelines:
+  default:
+  - <<: *test
   branches:
     master:
-      - step:
-          caches:
-            - node
-          script: # Modify the commands below to build your repository.
-            - yarn install
-            #- yarn test
-            #- yarn test-e2e
-            - yarn build
-            - cd dist
-            - apt-get update
-            - apt-get install zip -y
-            - zip -r ../deploy.zip . *
-            - cd ..
-            - ssh -t root@li86-123.members.linode.com "echo 'success' >> test.new"
-            - echo "put deploy.zip" >> run.sh
-            - sftp -b run.sh root@li86-123.members.linode.com:/root
-          services:
-            - database
+    - <<: *test
+    - <<: *push
 
 definitions:
   services:
