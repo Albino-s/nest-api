@@ -18,6 +18,7 @@ pipelines:
             - yarn build
             - cd dist
             - zip -r ../deploy.zip . *
+            - apt-get install zip -y
           services:
             - database
 
