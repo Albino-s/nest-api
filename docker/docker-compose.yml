@@ -19,7 +19,7 @@ services:
       dockerfile: docker/Dockerfile
     image: node_api
     command: >
-      bash -c "yarn && node dist/main.js"
+      bash -c "yarn && yarn debug"
     volumes:
       - ..:/app
     ports:

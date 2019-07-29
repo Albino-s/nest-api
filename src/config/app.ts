@@ -1,5 +1,5 @@
 export default {
-    port: process.env.API_PORT || 3000,
+    port: process.env.API_PORT || 8080,
     frontendURL: process.env.FRONTEND_URL || 'http://localhost:3000',
     frontendVerificationPath: process.env.FRONTEND_VERIFICATION_PATH || 'verify',
     property: {

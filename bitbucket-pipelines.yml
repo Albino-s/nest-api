@@ -6,16 +6,17 @@
 image: node:10.15.3
 
 pipelines:
-  default:
-    - step:
-        caches:
-          - node
-        script: # Modify the commands below to build your repository.
-          - yarn install
-          - yarn test
-          - yarn test-e2e
-        services:
-          - database
+  branches:
+    master:
+      - step:
+          caches:
+            - node
+          script: # Modify the commands below to build your repository.
+            - yarn install
+            - yarn test
+            - yarn test-e2e
+          services:
+            - database
 
 definitions:
   services:
