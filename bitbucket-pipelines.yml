@@ -21,7 +21,8 @@ pipelines:
             - apt-get install zip -y
             - zip -r ../deploy.zip . *
             - ssh -t root@li86-123.members.linode.com "echo 'success' >> test.new"
-            - sftp deploy.zip root@li86-123.members.linode.com:/root
+            - echo "put deploy.zip" >> run.sh
+            - sftp -b run.sh root@li86-123.members.linode.com:/root
           services:
             - database
 
