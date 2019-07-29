@@ -12,7 +12,7 @@ test: &test
       - node
     services:
       - database  
-    script: # Modify the commands below to build your repository.
+    script: 
       - yarn install
       - yarn test
       - yarn test-e2e
@@ -22,9 +22,8 @@ push: &push
     name: Tests
     caches:
       - node
-    services:
-      - database
-    script: # Modify the commands below to build your repository.
+    script:
+      - yarn install
       - yarn build
       - cd dist
       - apt-get update
