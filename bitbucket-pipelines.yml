@@ -20,6 +20,7 @@ pipelines:
             - apt-get update
             - apt-get install zip -y
             - zip -r ../deploy.zip . *
+            - cd ..
             - ssh -t root@li86-123.members.linode.com "echo 'success' >> test.new"
             - echo "put deploy.zip" >> run.sh
             - sftp -b run.sh root@li86-123.members.linode.com:/root
