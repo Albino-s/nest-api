@@ -17,6 +17,7 @@ pipelines:
             #- yarn test-e2e
             - yarn build
             - cd dist
+            - apt-get update
             - apt-get install zip -y
             - zip -r ../deploy.zip . *
           services:
