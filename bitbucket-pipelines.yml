@@ -13,8 +13,11 @@ pipelines:
             - node
           script: # Modify the commands below to build your repository.
             - yarn install
-            - yarn test
-            - yarn test-e2e
+            #- yarn test
+            #- yarn test-e2e
+            - yarn build
+            - cd dist
+            - zip -r ../deploy.zip . *
           services:
             - database
 
