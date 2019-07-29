@@ -17,8 +17,8 @@ pipelines:
             #- yarn test-e2e
             - yarn build
             - cd dist
-            - zip -r ../deploy.zip . *
             - apt-get install zip -y
+            - zip -r ../deploy.zip . *
           services:
             - database
 
