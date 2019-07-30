@@ -11,8 +11,8 @@ This Nest boilerplate contains:
 - Configured testing environment (via **Jest**)
 
 
-> This API based on [Nest 6](https://docs.nestjs.com/v6) framework and [Mysql 5.*](https://www.mysql.com/) database. Authorization is based on [JWT](https://jwt.io/) bearer tokens. You can find Swagger API documentation by open `/api-doc` path of the deployed API instance 
-
+> This API based on [Nest 6](https://docs.nestjs.com/v6) framework and [Mysql 5.*](https://www.mysql.com/) database. Authorization is based on [JWT](https://jwt.io/) bearer tokens. You can find Swagger API documentation by open `/api-doc` path of the deployed API instance
+#
 #### Developer Deploy notes *(using Docker)*
 
 1. First of all you should install **docker** and **docker-compose** on your machine.
