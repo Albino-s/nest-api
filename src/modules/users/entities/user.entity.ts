@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -17,10 +17,12 @@ export class User {
     @Column({type: 'boolean', default: false})
     isVerified: boolean;
 
-    @Column({type: 'datetime', default: new Date().toISOString()})
+    // @Column({type: 'datetime', default: "CURRENT_TIMESTAMP"})
+    @CreateDateColumn()
     createdAt: string;
 
-    @Column({type: 'datetime', default: new Date().toISOString()})
+    // @Column({type: 'datetime', default: "CURRENT_TIMESTAMP"})
+    @UpdateDateColumn()
     updatedAt: string;
 
     @Column('varchar')
