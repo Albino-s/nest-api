@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from 'nestjs-config';
-import * as path from 'path';
 import {UsersModule} from './modules/users/users.module';
 import {AuthModule} from './modules/auth/auth.module';
 import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
@@ -11,6 +10,8 @@ import {AppMailerModule} from './emails/app-mailer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {DatabaseModule} from './database/database.module';
 import {TypeOrmConfigService} from './database/typeorm.coinfig.service';
+import { PhotosModule } from './modules/photos/photos.module';
+import * as path from 'path';
 
 
 @Module({
@@ -27,6 +28,7 @@ import {TypeOrmConfigService} from './database/typeorm.coinfig.service';
           inject: [ConfigService],
       }),
       AppMailerModule,
+      PhotosModule,
 
   ],
     providers: [LoggerService],
